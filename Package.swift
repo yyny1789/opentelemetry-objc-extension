@@ -36,8 +36,10 @@ let package = Package(
             name: "ResourceExtensionObjc",
             targets: ["ResourceExtensionObjc"]
         ),
-        .executable(name: "OTelSample", targets: ["OTelSample"]),
-        .executable(name: "ObjCSample", targets: ["ObjCSample"])
+        .executable(
+            name: "OTelSample",
+            targets: ["OTelSample"]
+        )
     ],
     dependencies: [
         .package(url:"https://github.com/open-telemetry/opentelemetry-swift", from: "1.4.0"),
@@ -99,27 +101,7 @@ let package = Package(
                 .product(name: "URLSessionInstrumentation", package:"opentelemetry-swift")
                 
             ],
-            path: "Examples/",
-            sources: ["OTelSample/"]
-        ),
-        .target(
-            name: "ObjCSample",
-            dependencies: [
-                "OpenTelemetryApiObjc",
-                "OpenTelemetrySdkObjc",
-                "OpenTelemetryProtocolExporterObjc",
-                "StdoutExporterObjc",
-                "ResourceExtensionObjc",
-                "URLSessionInstrumentationObjc"
-            ],
-            path: "Examples/",
-            exclude: [
-                "ObjCSample/ObjCSample/Base.lproj/LaunchScreen.storyboard",
-                "ObjCSample/ObjCSample/Base.lproj/Main.storyboard",
-                "ObjCSample/ObjCSample/Assets.xcassets",
-                "ObjCSample/ObjCSample/Info.plist",
-            ],
-            sources: ["ObjCSample/ObjCSample/"]
+            path: "Examples/OTelSample/"
         ),
         .testTarget(
             name: "OpenTelemetryApiTest",
