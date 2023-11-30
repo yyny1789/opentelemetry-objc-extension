@@ -16,7 +16,7 @@ import Foundation
 
 import GRPC
 import NIO
-import OpenTelemetryProtocolExporter
+import OpenTelemetryProtocolExporterGrpc
 import OpenTelemetrySdkObjc
 
 

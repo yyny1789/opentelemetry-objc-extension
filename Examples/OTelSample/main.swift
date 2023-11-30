@@ -18,7 +18,9 @@ import GRPC
 import NIO
 import OpenTelemetryApi
 import OpenTelemetrySdk
-import OpenTelemetryProtocolExporter
+//import OpenTelemetryProtocolExporter
+import OpenTelemetryProtocolExporterGrpc
+import OpenTelemetryProtocolExporterCommon
 import StdoutExporter
 import URLSessionInstrumentation
 
@@ -75,6 +77,20 @@ URLSessionInstrumentation(configuration: URLSessionInstrumentationConfiguration(
 )
 
 //OpenTelemetry.registerPropagators(textPropagators: [TextMapPropagatorObjc(W3CTraceContextPropagator)], baggagePropagator: <#T##TextMapBaggagePropagator#>)
+
+func spanWithAttr() {
+    let span = tracer.spanBuilder(spanName: "operation name")
+        .setSpanKind(spanKind: .client)
+        .setAttribute(key: "product_id", value: 202302210002)
+        .setAttribute(key: "shop_id", value: 201708080003)
+        .setAttribute(key: "item_id", value: 202302220001)
+        .startSpan()
+    
+    
+    span.addEvent(name: "item id is empty", attributes: ["item_id": AttributeValue.double(0)])
+    span.status = .error(description: "item id is empty")
+    span.end()
+}
 
 
 func createSpans() {

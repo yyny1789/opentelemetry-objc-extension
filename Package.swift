@@ -1,15 +1,14 @@
-// swift-tools-version: 5.6
+// swift-tools-version:5.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "opentelemetry-objc-extension",
-    defaultLocalization: "en",
+//    defaultLocalization: "en",
     platforms: [.macOS(.v10_13),
                 .iOS(.v11),
-                .tvOS(.v11),
-                .watchOS(.v3)],
+                .tvOS(.v11)],
     products: [
         .library(
             name: "OpenTelemetrySdkObjc",
@@ -18,22 +17,27 @@ let package = Package(
         ),
         .library(
             name: "OpenTelemetryApiObjc",
+            type: .static,
             targets: ["OpenTelemetryApiObjc"]
         ),
         .library(
             name: "URLSessionInstrumentationObjc",
+            type: .static,
             targets: ["URLSessionInstrumentationObjc"]
         ),
         .library(
             name: "OpenTelemetryProtocolExporterObjc",
+            type: .static,
             targets: ["OpenTelemetryProtocolExporterObjc"]
         ),
         .library(
             name: "StdoutExporterObjc",
+            type: .static,
             targets: ["StdoutExporterObjc"]
         ),
         .library(
             name: "ResourceExtensionObjc",
+            type: .static,
             targets: ["ResourceExtensionObjc"]
         ),
         .executable(
@@ -42,17 +46,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url:"https://github.com/open-telemetry/opentelemetry-swift", from: "1.4.0"),
+        .package(name: "opentelemetry-swift", url:"https://github.com/open-telemetry/opentelemetry-swift", .exact("1.6.0")),
     ],
     targets: [
-        .target(
-            name: "OpenTelemetrySdkObjc",
-            dependencies: [
-                .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift")
-            ],
-            path: "Sources/",
-            sources: ["OpenTelemetrySdk/"]
-        ),
         .target(
             name: "OpenTelemetryApiObjc",
             dependencies: [
@@ -60,6 +56,15 @@ let package = Package(
             ],
             path: "Sources/",
             sources: ["OpenTelemetryApi/"]
+        ),
+        .target(
+            name: "OpenTelemetrySdkObjc",
+            dependencies: [
+                .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift"),
+                .target(name: "OpenTelemetryApiObjc")
+            ],
+            path: "Sources/",
+            sources: ["OpenTelemetrySdk/"]
         ),
         .target(
             name: "OpenTelemetryProtocolExporterObjc",
@@ -91,7 +96,7 @@ let package = Package(
             ],
             path: "Sources/Instrumentation/SDKResourceExtension"
         ),
-        .executableTarget(
+        .target(
             name: "OTelSample",
             dependencies: [
                 .product(name: "OpenTelemetryApi", package:"opentelemetry-swift"),

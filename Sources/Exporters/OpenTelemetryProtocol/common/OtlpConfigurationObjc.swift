@@ -14,7 +14,8 @@
 
 import Foundation
 
-import OpenTelemetryProtocolExporter
+import OpenTelemetryProtocolExporterGrpc
+import OpenTelemetryProtocolExporterCommon
 
 //@objcMembers
 public class OtlpConfigurationObjc : NSObject {
