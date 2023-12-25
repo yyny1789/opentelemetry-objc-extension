@@ -22,7 +22,7 @@ public class OtlpConfigurationObjc : NSObject {
     @objc
     public static let DefaultTimeoutInterval : TimeInterval = OtlpConfiguration.DefaultTimeoutInterval
     
-    var otlpConfiguration : OtlpConfiguration
+    public var otlpConfiguration : OtlpConfiguration
     
     @objc
     public init(timeout: TimeInterval = DefaultTimeoutInterval, headers: Dictionary<String, String>? = nil) {

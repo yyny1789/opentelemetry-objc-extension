@@ -16,9 +16,9 @@ import Foundation
 
 import GRPC
 import NIO
+import OpenTelemetryProtocolExporterCommonObjc
 import OpenTelemetryProtocolExporterGrpc
 import OpenTelemetrySdkObjc
-
 
 public class OtlpTraceExporterObjc : SpanExporterObjc {
     var otelExporter: OtlpTraceExporter

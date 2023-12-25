@@ -26,9 +26,21 @@ let package = Package(
             targets: ["URLSessionInstrumentationObjc"]
         ),
         .library(
-            name: "OpenTelemetryProtocolExporterObjc",
+            name: "OpenTelemetryProtocolExporterCommonObjc",
             type: .static,
-            targets: ["OpenTelemetryProtocolExporterObjc"]
+            targets: ["OpenTelemetryProtocolExporterCommonObjc"]
+        ),
+        .library(
+            name: "OpenTelemetryProtocolExporterObjc", 
+            type: .static,
+            targets: [
+                "OpenTelemetryProtocolExporterObjc"
+            ]
+        ),
+        .library(
+            name: "OpenTelemetryProtocolExporterHTTPObjc",
+            type: .static,
+            targets: ["OpenTelemetryProtocolExporterHTTPObjc"]
         ),
         .library(
             name: "StdoutExporterObjc",
@@ -47,6 +59,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "opentelemetry-swift", url:"https://github.com/open-telemetry/opentelemetry-swift", .exact("1.6.0")),
+        .package(name: "grpc-swift", url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0"),
     ],
     targets: [
         .target(
@@ -67,11 +80,30 @@ let package = Package(
             sources: ["OpenTelemetrySdk/"]
         ),
         .target(
-            name: "OpenTelemetryProtocolExporterObjc",
+            name: "OpenTelemetryProtocolExporterCommonObjc",
             dependencies: [
                 .product(name: "OpenTelemetryProtocolExporter", package: "opentelemetry-swift")
             ],
-            path: "Sources/Exporters/OpenTelemetryProtocol"
+            path: "Sources/Exporters/OpenTelemetryProtocolCommon"
+        ),
+        .target(
+            name: "OpenTelemetryProtocolExporterHTTPObjc",
+            dependencies: [
+                .byName(name: "OpenTelemetrySdkObjc"),
+                .product(name: "OpenTelemetryProtocolExporterHTTP", package: "opentelemetry-swift")
+            ],
+            path: "Sources/Exporters/OpenTelemetryProtocolHttp"
+            
+        ),
+        .target(
+            name: "OpenTelemetryProtocolExporterObjc",
+            dependencies: [
+                .byName(name: "OpenTelemetrySdkObjc"),
+                .byName(name: "OpenTelemetryProtocolExporterCommonObjc"),
+                .product(name: "OpenTelemetryProtocolExporter", package: "opentelemetry-swift"),
+                .product(name: "GRPC", package: "grpc-swift")
+            ],
+            path: "Sources/Exporters/OpenTelemetryProtocolGrpc"
         ),
         .target(
             name: "StdoutExporterObjc",
