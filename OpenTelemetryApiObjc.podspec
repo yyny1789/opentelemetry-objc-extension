@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OpenTelemetryApiObjc'
-  s.version          = '1.1.0-dev.5'
+  s.version          = '1.1.0-dev.6'
   s.summary          = 'aliyun log service ios otel common library.'
 
 # This description is used to generate tags and improve search results.
@@ -40,9 +40,9 @@ Pod::Spec.new do |s|
 #  s.osx.deployment_target =  '10.13'
 #  s.tvos.deployment_target =  '11.0'
   
-  s.dependency 'AliyunLogOTelCommon/OpenTelemetryApi'
-  s.vendored_frameworks = 'XCFramework/OpenTelemetryApiObjc.xcframework'
-#  s.source_files = 'Sources/OpenTelemetryApi/**/*.{m,h,swift}'
+  s.dependency 'AliyunLogOTelCommon/OpenTelemetryApi', "4.2.1-dev.2"
+#  s.vendored_frameworks = 'XCFramework/OpenTelemetryApiObjc.xcframework'
+  s.source_files = 'Sources/OpenTelemetryApi/**/*.{m,h,swift}'
   s.pod_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 i386',
     'OTHER_LDFLAGS' => '-ObjC',
