@@ -21,6 +21,7 @@ import OpenTelemetrySdk
 //    func willExportCallback(_ spanData: [SpanDataObjc])
 //}
 
+@objc
 public class BatchSpanProcessorObjc: SpanProcessorObjc {
     var batchSpanProcessor: BatchSpanProcessor
     

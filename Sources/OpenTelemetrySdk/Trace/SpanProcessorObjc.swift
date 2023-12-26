@@ -15,6 +15,7 @@
 import Foundation
 import OpenTelemetrySdk
 
+@objc
 public class SpanProcessorObjc : NSObject {
     var spanProcessor: SpanProcessor
     
