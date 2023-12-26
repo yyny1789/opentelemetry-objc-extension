@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OpenTelemetryApiObjc'
-  s.version          = '1.1.0-dev.6'
+  s.version          = '1.1.0-dev.7'
   s.summary          = 'aliyun log service ios otel common library.'
 
 # This description is used to generate tags and improve search results.
