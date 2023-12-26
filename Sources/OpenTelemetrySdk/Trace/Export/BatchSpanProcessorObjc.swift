@@ -22,7 +22,7 @@ import OpenTelemetrySdk
 //}
 
 @objc
-public class BatchSpanProcessorObjc: SpanProcessorObjc {
+public class BatchSpanProcessorObjc: NSObject, SpanProcessorObjc {
     var batchSpanProcessor: BatchSpanProcessor
     
     public init(spanExporter: SpanExporterObjc, scheduleDelay: TimeInterval = 5, exportTimeout: TimeInterval = 30,
@@ -40,7 +40,11 @@ public class BatchSpanProcessorObjc: SpanProcessorObjc {
 //            callback.willExportCallback(spanDataObjcs)
         })
         
-        super.init(batchSpanProcessor)
+//        super.init(batchSpanProcessor)
+    }
+    
+    public func spanProcessor() -> SpanProcessorImpl {
+        return SpanProcessorImpl.processor(batchSpanProcessor)
     }
     
     @objc

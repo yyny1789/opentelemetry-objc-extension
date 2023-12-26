@@ -15,17 +15,23 @@
 import Foundation
 import OpenTelemetrySdk
 
-public class MultiSpanProcessorObjc : SpanProcessorObjc {
+public class MultiSpanProcessorObjc: NSObject, SpanProcessorObjc {
+
+    
     var multiSpanProcessor: MultiSpanProcessor
     
     public init(_ spanProcessors: Array<SpanProcessorObjc>) {
         var processors = [SpanProcessor]()
         for processor in spanProcessors {
-            processors.append(processor.spanProcessor)
+            processors.append(processor.spanProcessor().processor)
         }
         
         self.multiSpanProcessor = MultiSpanProcessor(spanProcessors: processors)
-        super.init(multiSpanProcessor)
+//        super.init(multiSpanProcessor)
+    }
+    
+    public func spanProcessor() -> SpanProcessorImpl {
+        return SpanProcessorImpl.processor(multiSpanProcessor)
     }
     
     @objc

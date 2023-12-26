@@ -51,7 +51,7 @@ public class TracerProviderBuilderObjc : NSObject {
     
     @objc
     public func addSpanProcessor(_ spanProcessor: SpanProcessorObjc) -> Self {
-        _ = tracerProviderBuilder.add(spanProcessor: spanProcessor.spanProcessor)
+        _ = tracerProviderBuilder.add(spanProcessor: spanProcessor.spanProcessor().processor)
         return self
     }
     
@@ -60,7 +60,7 @@ public class TracerProviderBuilderObjc : NSObject {
         var processors = [SpanProcessor]()
         
         for processor in spanProcessors {
-            processors.append(processor.spanProcessor)
+            processors.append(processor.spanProcessor().processor)
         }
         
         _ = tracerProviderBuilder.add(spanProcessors: processors)

@@ -16,10 +16,18 @@ import Foundation
 import OpenTelemetrySdk
 
 @objc
-public class SpanProcessorObjc : NSObject {
-    var spanProcessor: SpanProcessor
+public protocol SpanProcessorObjc {
+    func spanProcessor() -> SpanProcessorImpl
+}
+
+@objc
+public class SpanProcessorImpl: NSObject {
+    var processor: SpanProcessor
+    private init(processor: SpanProcessor) {
+        self.processor = processor
+    }
     
-    public init(_ spanProcessor: SpanProcessor) {
-        self.spanProcessor = spanProcessor
+    public static func processor(_ processor: SpanProcessor) -> SpanProcessorImpl {
+        return SpanProcessorImpl(processor: processor)
     }
 }

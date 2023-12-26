@@ -17,13 +17,17 @@ import Foundation
 import OpenTelemetryApi
 import OpenTelemetrySdk
 
-public class SimpleSpanProcessorObjc : SpanProcessorObjc {
+public class SimpleSpanProcessorObjc: NSObject, SpanProcessorObjc {
     var simpleSpanProcessor: SimpleSpanProcessor
     
     @objc
     public init(spanExporter: SpanExporterObjc) {
         simpleSpanProcessor = SimpleSpanProcessor(spanExporter: spanExporter.spanExporter)
-        super.init(simpleSpanProcessor)
+//        super.init(simpleSpanProcessor)
+    }
+    
+    public func spanProcessor() -> SpanProcessorImpl {
+        return SpanProcessorImpl.processor(simpleSpanProcessor)
     }
     
     @objc
