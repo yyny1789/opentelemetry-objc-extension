@@ -48,8 +48,17 @@ open class SpanExporterObjc : NSObject {
     }
     
     @objc
-    public static func exporter(_ impl: SpanExporterImpl) -> SpanExporterObjc {
+    public static func exporter(impl: SpanExporterImpl) -> SpanExporterObjc {
         return SpanExporterObjc(SpanExporterWrapper(impl))
+    }
+
+    @objc
+    public static func exporter(_ exporter: NSObject) -> SpanExporterObjc? {
+        guard let exporter = exporter as? SpanExporter else {
+            return nil
+        }
+
+        return SpanExporterObjc(exporter)
     }
 }
 
