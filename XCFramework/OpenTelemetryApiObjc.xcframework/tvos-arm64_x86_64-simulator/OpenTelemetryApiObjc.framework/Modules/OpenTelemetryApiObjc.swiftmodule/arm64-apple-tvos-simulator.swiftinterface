@@ -1,0 +1,761 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-tvos11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OpenTelemetryApiObjc
+import Foundation
+import OpenTelemetryApi
+import Swift
+import _Concurrency
+@objc public class BaggageBuilderObjc : ObjectiveC.NSObject {
+  public init(_ baggabeBuilder: OpenTelemetryApi.BaggageBuilder)
+  @discardableResult
+  @objc public func setParent(_ parent: OpenTelemetryApiObjc.BaggageObjc?) -> Self
+  @discardableResult
+  @objc public func setNoParent() -> Self
+  @discardableResult
+  @objc public func put(_ key: OpenTelemetryApiObjc.EntryKeyObjc, value: OpenTelemetryApiObjc.EntryValueObjc, metadata: OpenTelemetryApiObjc.EntryMetadataObjc?) -> Self
+  @discardableResult
+  @objc public func remove(_ key: OpenTelemetryApiObjc.EntryKeyObjc) -> Self
+  @objc public func build() -> OpenTelemetryApiObjc.BaggageObjc
+  @objc deinit
+}
+@objc public class BaggageManagerObjc : ObjectiveC.NSObject {
+  public init(_ baggageManager: OpenTelemetryApi.BaggageManager)
+  @objc public func baggageBuilder() -> OpenTelemetryApiObjc.BaggageBuilderObjc
+  @objc deinit
+}
+@objc public class BaggageObjc : ObjectiveC.NSObject {
+  public init(_ baggage: OpenTelemetryApi.Baggage)
+  @objc public static func baggageBuilder() -> OpenTelemetryApiObjc.BaggageBuilderObjc
+  @objc public func getEntries() -> [OpenTelemetryApiObjc.EntryObjc]
+  @objc public func getEntryValue(key: OpenTelemetryApiObjc.EntryKeyObjc) -> OpenTelemetryApiObjc.EntryValueObjc?
+  @objc deinit
+}
+@objc public class EntryKeyObjc : ObjectiveC.NSObject {
+  public init(_ entryKey: OpenTelemetryApi.EntryKey)
+  @objc public var name: Swift.String {
+    @objc get
+  }
+  @objc public static func entryKey(_ name: Swift.String) -> OpenTelemetryApiObjc.EntryKeyObjc?
+  @objc deinit
+}
+@objc public class EntryMetadataObjc : ObjectiveC.NSObject {
+  @objc public var metadat: Swift.String {
+    @objc get
+  }
+  public init(_ entryMetadata: OpenTelemetryApi.EntryMetadata)
+  @objc public static func entryMetadata(_ metadata: Swift.String?) -> OpenTelemetryApiObjc.EntryMetadataObjc?
+  @objc deinit
+}
+@objc public class EntryObjc : ObjectiveC.NSObject {
+  public init(_ entry: OpenTelemetryApi.Entry)
+  public var key: OpenTelemetryApiObjc.EntryKeyObjc {
+    get
+  }
+  public var value: OpenTelemetryApiObjc.EntryValueObjc {
+    get
+  }
+  public var metadata: OpenTelemetryApiObjc.EntryMetadataObjc? {
+    get
+  }
+  convenience public init(key: OpenTelemetryApiObjc.EntryKeyObjc, value: OpenTelemetryApiObjc.EntryValueObjc, metadata: OpenTelemetryApiObjc.EntryMetadataObjc?)
+  @objc deinit
+}
+@objc public class EntryValueObjc : ObjectiveC.NSObject {
+  public init(_ entryValue: OpenTelemetryApi.EntryValue)
+  @objc public var string: Swift.String {
+    @objc get
+  }
+  @objc public static func entryValue(_ string: Swift.String) -> OpenTelemetryApiObjc.EntryValueObjc?
+  @objc deinit
+}
+@objc public class TextMapBaggagePropagatorObjc : ObjectiveC.NSObject {
+  public init(_ textMapBaggagePropagator: OpenTelemetryApi.TextMapBaggagePropagator)
+  @objc public func inject(_ baggage: OpenTelemetryApiObjc.BaggageObjc, carrier: Foundation.NSMutableDictionary, setter: OpenTelemetryApiObjc.SetterImpl)
+  @objc public static func propagator(_ impl: OpenTelemetryApiObjc.TextMapBaggagePropagatorImpl) -> OpenTelemetryApiObjc.TextMapBaggagePropagatorObjc
+  @objc deinit
+}
+@objc public protocol TextMapBaggagePropagatorImpl {
+  @objc var fields: Swift.Set<Swift.String> { get }
+  @objc func inject(_ baggage: OpenTelemetryApiObjc.BaggageObjc, carrier: Foundation.NSMutableDictionary, setter: OpenTelemetryApiObjc.SetterImpl)
+  @objc @discardableResult
+  func extract(_ carrier: [Swift.String : Swift.String], getter: OpenTelemetryApiObjc.GetterImpl) -> OpenTelemetryApiObjc.BaggageObjc?
+}
+@objc public enum OpenTelemetryContextKeysObjc : Swift.Int {
+  case span
+  case baggage
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol ContextManagerImpl {
+  @objc func getCurrentContextValue(_ forKey: OpenTelemetryApiObjc.OpenTelemetryContextKeysObjc) -> ObjectiveC.NSObject?
+  @objc func setCurrentContextValue(_ forKey: OpenTelemetryApiObjc.OpenTelemetryContextKeysObjc, value: ObjectiveC.NSObject)
+  @objc func removeContextValue(_ forKey: OpenTelemetryApiObjc.OpenTelemetryContextKeysObjc, value: ObjectiveC.NSObject)
+}
+@objc public class ContextManagerObjc : ObjectiveC.NSObject {
+  public init(_ contextManager: OpenTelemetryApi.ContextManager)
+  @objc public static func contextManager(_ impl: OpenTelemetryApiObjc.ContextManagerImpl) -> OpenTelemetryApiObjc.ContextManagerObjc
+  @objc deinit
+}
+@objc public class OpenTelemetryContextProviderObjc : ObjectiveC.NSObject {
+  @objc public var activeSpan: OpenTelemetryApiObjc.SpanObjc? {
+    @objc get
+  }
+  public init(_ contextProvider: OpenTelemetryApi.OpenTelemetryContextProvider)
+  @objc public func setActiveSpan(_ span: OpenTelemetryApiObjc.SpanObjc)
+  @objc public func removeContextForSpan(_ span: OpenTelemetryApiObjc.SpanObjc)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class OpenTelemetryObjc : ObjectiveC.NSObject {
+  @objc public static var instance: OpenTelemetryApiObjc.OpenTelemetryObjc
+  @objc public var tracerProvider: OpenTelemetryApiObjc.TracerProviderObjc {
+    @objc get
+  }
+  @objc public var contextProvider: OpenTelemetryApiObjc.OpenTelemetryContextProviderObjc {
+    @objc get
+  }
+  @objc public var baggageManager: OpenTelemetryApiObjc.BaggageManagerObjc {
+    @objc get
+  }
+  @objc public var propagators: OpenTelemetryApiObjc.ContextPropagatorsObjc {
+    @objc get
+  }
+  @objc public static func registerTracerProvider(_ tracerProvider: OpenTelemetryApiObjc.TracerProviderObjc)
+  @objc public static func registerContextManager(_ contextManager: OpenTelemetryApiObjc.ContextManagerObjc)
+  @objc public static func registerPropagators(textPropagators: [OpenTelemetryApiObjc.TextMapPropagatorObjc], baggagePropagator: OpenTelemetryApiObjc.TextMapBaggagePropagatorObjc)
+  @objc deinit
+}
+@objc public class ContextPropagatorsObjc : ObjectiveC.NSObject {
+  @objc public var textMapPropagator: OpenTelemetryApiObjc.TextMapPropagatorObjc {
+    @objc get
+  }
+  @objc public var textMapBaggagePropagator: OpenTelemetryApiObjc.TextMapBaggagePropagatorObjc {
+    @objc get
+  }
+  public init(_ contextPropagators: OpenTelemetryApi.ContextPropagators)
+  @objc deinit
+}
+@objc public class TextMapPropagatorObjc : ObjectiveC.NSObject {
+  public var textMapPropagator: OpenTelemetryApi.TextMapPropagator
+  public init(_ textMapPropagator: OpenTelemetryApi.TextMapPropagator)
+  public var fields: Swift.Set<Swift.String> {
+    get
+  }
+  @objc public func inject(_ spanContext: OpenTelemetryApiObjc.SpanContextObjc, carrier: Foundation.NSMutableDictionary, setter: OpenTelemetryApiObjc.SetterImpl)
+  @discardableResult
+  @objc public func extract(_ carrier: [Swift.String : Swift.String], getter: OpenTelemetryApiObjc.GetterImpl) -> OpenTelemetryApiObjc.SpanContextObjc?
+  @objc public static func propagator(_ textMapPropagator: OpenTelemetryApiObjc.TextMapPropagatorImpl) -> OpenTelemetryApiObjc.TextMapPropagatorObjc
+  @objc deinit
+}
+@objc public protocol SetterImpl {
+  @objc func set(_ carrier: Foundation.NSMutableDictionary, key: Swift.String, value: Swift.String)
+}
+@objc public protocol GetterImpl {
+  @objc func get(_ carrier: [Swift.String : Swift.String], key: Swift.String) -> [Swift.String]?
+}
+@objc public protocol TextMapPropagatorImpl {
+  @objc var fields: Swift.Set<Swift.String> { get }
+  @objc func inject(_ spanContext: OpenTelemetryApiObjc.SpanContextObjc, carrier: Foundation.NSMutableDictionary, setter: OpenTelemetryApiObjc.SetterImpl)
+  @objc @discardableResult
+  func extract(_ carrier: [Swift.String : Swift.String], getter: OpenTelemetryApiObjc.GetterImpl) -> OpenTelemetryApiObjc.SpanContextObjc?
+}
+@objc public class AttributeValueObjc : ObjectiveC.NSObject {
+  public var attributeValue: OpenTelemetryApi.AttributeValue {
+    get
+  }
+  public init(_ attributeValue: OpenTelemetryApi.AttributeValue)
+  @objc public static func string(_ value: Swift.String) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc public static func bool(_ value: Swift.Bool) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc public static func int(_ value: Swift.Int) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc public static func double(_ value: Swift.Double) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc public static func stringArray(_ value: Swift.Array<Swift.String>) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc public static func intArray(_ value: Swift.Array<Swift.Int>) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc public static func doubleArray(_ value: Swift.Array<Swift.Double>) -> OpenTelemetryApiObjc.AttributeValueObjc
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class SemanticAttributesObjc : ObjectiveC.NSObject {
+  @objc public static var awsLambdaInvokedArn: Swift.String
+  @objc public static var dbSystem: Swift.String
+  @objc public static var dbConnectionString: Swift.String
+  @objc public static var dbUser: Swift.String
+  @objc public static var dbJdbcDriverClassname: Swift.String
+  @objc public static var dbName: Swift.String
+  @objc public static var dbStatement: Swift.String
+  @objc public static var dbOperation: Swift.String
+  @objc public static var netPeerName: Swift.String
+  @objc public static var netPeerIp: Swift.String
+  @objc public static var netPeerPort: Swift.String
+  @objc public static var netTransport: Swift.String
+  @objc public static var dbMssqlInstanceName: Swift.String
+  @objc public static var dbCassandraKeyspace: Swift.String
+  @objc public static var dbCassandraPageSize: Swift.String
+  @objc public static var dbCassandraConsistencyLevel: Swift.String
+  @objc public static var dbCassandraTable: Swift.String
+  @objc public static var dbCassandraIdempotence: Swift.String
+  @objc public static var dbCassandraSpeculativeExecutionCount: Swift.String
+  @objc public static var dbCassandraCoordinatorId: Swift.String
+  @objc public static var dbCassandraCoordinatorDc: Swift.String
+  @objc public static var dbHbaseNamespace: Swift.String
+  @objc public static var dbRedisDatabaseIndex: Swift.String
+  @objc public static var dbMongodbCollection: Swift.String
+  @objc public static var dbSqlTable: Swift.String
+  @objc public static var exceptionType: Swift.String
+  @objc public static var exceptionMessage: Swift.String
+  @objc public static var exceptionStacktrace: Swift.String
+  @objc public static var exceptionEscaped: Swift.String
+  @objc public static var faasTrigger: Swift.String
+  @objc public static var faasExecution: Swift.String
+  @objc public static var faasDocumentCollection: Swift.String
+  @objc public static var faasDocumentOperation: Swift.String
+  @objc public static var faasDocumentTime: Swift.String
+  @objc public static var faasDocumentName: Swift.String
+  @objc public static var httpMethod: Swift.String
+  @objc public static var httpUrl: Swift.String
+  @objc public static var httpTarget: Swift.String
+  @objc public static var httpHost: Swift.String
+  @objc public static var httpScheme: Swift.String
+  @objc public static var httpStatusCode: Swift.String
+  @objc public static var httpFlavor: Swift.String
+  @objc public static var httpUserAgent: Swift.String
+  @objc public static var httpRequestContentLength: Swift.String
+  @objc public static var httpRequestContentLengthUncompressed: Swift.String
+  @objc public static var httpResponseContentLength: Swift.String
+  @objc public static var httpResponseContentLengthUncompressed: Swift.String
+  @objc public static var httpServerName: Swift.String
+  @objc public static var httpRoute: Swift.String
+  @objc public static var httpClientIp: Swift.String
+  @objc public static var netHostIp: Swift.String
+  @objc public static var netHostPort: Swift.String
+  @objc public static var netHostName: Swift.String
+  @objc public static var netHostConnectionType: Swift.String
+  @objc public static var netHostConnectionSubtype: Swift.String
+  @objc public static var netHostCarrierName: Swift.String
+  @objc public static var netHostCarrierMcc: Swift.String
+  @objc public static var netHostCarrierMnc: Swift.String
+  @objc public static var netHostCarrierIcc: Swift.String
+  @objc public static var messagingSystem: Swift.String
+  @objc public static var messagingDestination: Swift.String
+  @objc public static var messagingDestinationKind: Swift.String
+  @objc public static var messagingTempDestination: Swift.String
+  @objc public static var messagingProtocol: Swift.String
+  @objc public static var messagingProtocolVersion: Swift.String
+  @objc public static var messagingUrl: Swift.String
+  @objc public static var messagingMessageId: Swift.String
+  @objc public static var messagingConversationId: Swift.String
+  @objc public static var messagingMessagePayloadSizeBytes: Swift.String
+  @objc public static var messagingMessagePayloadCompressedSizeBytes: Swift.String
+  @objc public static var faasTime: Swift.String
+  @objc public static var faasCron: Swift.String
+  @objc public static var faasColdstart: Swift.String
+  @objc public static var faasInvokedName: Swift.String
+  @objc public static var faasInvokedProvider: Swift.String
+  @objc public static var faasInvokedRegion: Swift.String
+  @objc public static var peerService: Swift.String
+  @objc public static var enduserId: Swift.String
+  @objc public static var enduserRole: Swift.String
+  @objc public static var enduserScope: Swift.String
+  @objc public static var threadId: Swift.String
+  @objc public static var threadName: Swift.String
+  @objc public static var codeFunction: Swift.String
+  @objc public static var codeNamespace: Swift.String
+  @objc public static var codeFilepath: Swift.String
+  @objc public static var codeLineno: Swift.String
+  @objc public static var rpcSystem: Swift.String
+  @objc public static var rpcService: Swift.String
+  @objc public static var rpcMethod: Swift.String
+  @objc public static var awsDynamodbTableNames: Swift.String
+  @objc public static var awsDynamodbConsumedCapacity: Swift.String
+  @objc public static var awsDynamodbItemCollectionMetrics: Swift.String
+  @objc public static var awsDynamodbProvisionedReadCapacity: Swift.String
+  @objc public static var awsDynamodbProvisionedWriteCapacity: Swift.String
+  @objc public static var awsDynamodbConsistentRead: Swift.String
+  @objc public static var awsDynamodbProjection: Swift.String
+  @objc public static var awsDynamodbLimit: Swift.String
+  @objc public static var awsDynamodbAttributesToGet: Swift.String
+  @objc public static var awsDynamodbIndexName: Swift.String
+  @objc public static var awsDynamodbSelect: Swift.String
+  @objc public static var awsDynamodbGlobalSecondaryIndexes: Swift.String
+  @objc public static var awsDynamodbLocalSecondaryIndexes: Swift.String
+  @objc public static var awsDynamodbExclusiveStartTable: Swift.String
+  @objc public static var awsDynamodbTableCount: Swift.String
+  @objc public static var awsDynamodbScanForward: Swift.String
+  @objc public static var awsDynamodbSegment: Swift.String
+  @objc public static var awsDynamodbTotalSegments: Swift.String
+  @objc public static var awsDynamodbCount: Swift.String
+  @objc public static var awsDynamodbScannedCount: Swift.String
+  @objc public static var awsDynamodbAttributeDefinitions: Swift.String
+  @objc public static var awsDynamodbGlobalSecondaryIndexUpdates: Swift.String
+  @objc public static var messagingOperation: Swift.String
+  @objc public static var messagingConsumerId: Swift.String
+  @objc public static var messagingRabbitmqRoutingKey: Swift.String
+  @objc public static var messagingKafkaMessageKey: Swift.String
+  @objc public static var messagingKafkaConsumerGroup: Swift.String
+  @objc public static var messagingKafkaClientId: Swift.String
+  @objc public static var messagingKafkaPartition: Swift.String
+  @objc public static var messagingKafkaTombstone: Swift.String
+  @objc public static var rpcGrpcStatusCode: Swift.String
+  @objc public static var rpcJsonrpcVersion: Swift.String
+  @objc public static var rpcJsonrpcRequestId: Swift.String
+  @objc public static var rpcJsonrpcErrorCode: Swift.String
+  @objc public static var rpcJsonrpcErrorMessage: Swift.String
+  @objc public static var messageType: Swift.String
+  @objc public static var messageId: Swift.String
+  @objc public static var messageCompressedSize: Swift.String
+  @objc public static var messageUncompressedSize: Swift.String
+  @objc public static var exception: Swift.String
+  @objc public class DbSystemValuesObjc : ObjectiveC.NSObject {
+    public static let otherSql: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let mssql: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let mysql: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let oracle: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let db2: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let postgresql: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let redshift: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let hive: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let cloudscape: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let hsqldb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let progress: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let maxdb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let hanadb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let ingres: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let firstsql: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let edb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let cache: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let adabas: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let firebird: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let derby: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let filemaker: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let informix: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let instantdb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let interbase: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let mariadb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let netezza: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let pervasive: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let pointbase: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let sqlite: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let sybase: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let teradata: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let vertica: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let h2: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let coldfusion: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let cassandra: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let hbase: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let mongodb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let redis: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let couchbase: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let couchdb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let cosmosdb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let dynamodb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let neo4j: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let geode: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let elasticsearch: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let memcached: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public static let cockroachdb: OpenTelemetryApiObjc.SemanticAttributesObjc.DbSystemValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class NetTransportValuesObjc : ObjectiveC.NSObject {
+    @objc public static var ip_tcp: Swift.String
+    @objc public static var ip_udp: Swift.String
+    @objc public static var ip: Swift.String
+    @objc public static var unix: Swift.String
+    @objc public static var pipe: Swift.String
+    @objc public static var inproc: Swift.String
+    @objc public static var other: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class DbCassandraConsistencyLevelValuesObjc : ObjectiveC.NSObject {
+    @objc public static var all: Swift.String
+    @objc public static var each_quorum: Swift.String
+    @objc public static var quorum: Swift.String
+    @objc public static var local_quorum: Swift.String
+    @objc public static var one: Swift.String
+    @objc public static var two: Swift.String
+    @objc public static var three: Swift.String
+    @objc public static var local_one: Swift.String
+    @objc public static var any: Swift.String
+    @objc public static var serial: Swift.String
+    @objc public static var local_serial: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class FaasTriggerValuesObjc : ObjectiveC.NSObject {
+    @objc public static var datasource: Swift.String
+    @objc public static var http: Swift.String
+    @objc public static var pubsub: Swift.String
+    @objc public static var timer: Swift.String
+    @objc public static var other: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class FaasDocumentOperationValuesObjc : ObjectiveC.NSObject {
+    public static let insert: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasDocumentOperationValuesObjc
+    public static let edit: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasDocumentOperationValuesObjc
+    public static let delete: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasDocumentOperationValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc public class HttpFlavorValuesObjc : ObjectiveC.NSObject {
+    public static let http10: OpenTelemetryApiObjc.SemanticAttributesObjc.HttpFlavorValuesObjc
+    public static let http11: OpenTelemetryApiObjc.SemanticAttributesObjc.HttpFlavorValuesObjc
+    public static let http20: OpenTelemetryApiObjc.SemanticAttributesObjc.HttpFlavorValuesObjc
+    public static let spdy: OpenTelemetryApiObjc.SemanticAttributesObjc.HttpFlavorValuesObjc
+    public static let quic: OpenTelemetryApiObjc.SemanticAttributesObjc.HttpFlavorValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc public class NetHostConnectionTypeValuesObjc : ObjectiveC.NSObject {
+    public static let wifi: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionTypeValuesObjc
+    public static let wired: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionTypeValuesObjc
+    public static let cell: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionTypeValuesObjc
+    public static let unavailable: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionTypeValuesObjc
+    public static let unknown: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionTypeValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc public class NetHostConnectionSubtypeValuesObjc : ObjectiveC.NSObject {
+    public static let gprs: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let edge: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let umts: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let cdma: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let evdo0: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let evdoA: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let cdma20001xrtt: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let hsdpa: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let hsupa: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let hspa: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let iden: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let evdoB: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let lte: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let ehrpd: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let hspap: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let gsm: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let tdScdma: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let iwlan: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let nr: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let nrnsa: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public static let lteCa: OpenTelemetryApiObjc.SemanticAttributesObjc.NetHostConnectionSubtypeValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class MessagingDestinationKindValuesObjc : ObjectiveC.NSObject {
+    @objc public static var queue: Swift.String
+    @objc public static var topic: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class FaasInvokedProviderValuesObjc : ObjectiveC.NSObject {
+    public static let alibabaCloud: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasInvokedProviderValuesObjc
+    public static let aws: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasInvokedProviderValuesObjc
+    public static let azure: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasInvokedProviderValuesObjc
+    public static let gcp: OpenTelemetryApiObjc.SemanticAttributesObjc.FaasInvokedProviderValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class MessagingOperationValuesObjc : ObjectiveC.NSObject {
+    @objc public static var receive: Swift.String
+    @objc public static var process: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class RpcGrpcStatusCodeValuesObjc : ObjectiveC.NSObject {
+    @objc public static var ok: Swift.Int
+    @objc public static var cancelled: Swift.Int
+    @objc public static var unknown: Swift.Int
+    @objc public static var invalid_argument: Swift.Int
+    @objc public static var deadline_exceeded: Swift.Int
+    @objc public static var not_found: Swift.Int
+    @objc public static var already_exists: Swift.Int
+    @objc public static var permission_denied: Swift.Int
+    @objc public static var resource_exhausted: Swift.Int
+    @objc public static var failed_precondition: Swift.Int
+    @objc public static var aborted: Swift.Int
+    @objc public static var out_of_range: Swift.Int
+    @objc public static var unimplemented: Swift.Int
+    @objc public static var `internal`: Swift.Int
+    @objc public static var unavailable: Swift.Int
+    @objc public static var data_loss: Swift.Int
+    @objc public static var unauthenticated: Swift.Int
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @_inheritsConvenienceInitializers @objc public class MessageTypeValuesObjc : ObjectiveC.NSObject {
+    @objc public static var sent: Swift.String
+    @objc public static var received: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class SpanBuilderObjc : ObjectiveC.NSObject {
+  public init(_ spanBuilder: OpenTelemetryApi.SpanBuilder)
+  @discardableResult
+  @objc public func setParent(_ parent: OpenTelemetryApiObjc.SpanObjc) -> Self
+  @discardableResult
+  @objc public func setParent(context: OpenTelemetryApiObjc.SpanContextObjc) -> Self
+  @discardableResult
+  @objc public func setNoParent() -> Self
+  @discardableResult
+  @objc public func addLink(_ spanContext: OpenTelemetryApiObjc.SpanContextObjc) -> Self
+  @discardableResult
+  @objc public func addLink(_ spanContext: OpenTelemetryApiObjc.SpanContextObjc, attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc>) -> Self
+  @discardableResult
+  @objc public func setAttribute(_ key: Swift.String, stringValue: Swift.String) -> Self
+  @discardableResult
+  @objc public func setAttribute(_ key: Swift.String, intValue: Swift.Int) -> Self
+  @discardableResult
+  @objc public func setAttribute(_ key: Swift.String, doubleValue: Swift.Double) -> Self
+  @discardableResult
+  @objc public func setAttribute(_ key: Swift.String, boolValue: Swift.Bool) -> Self
+  @discardableResult
+  @objc public func setAttribute(_ key: Swift.String, value: OpenTelemetryApiObjc.AttributeValueObjc) -> Self
+  @discardableResult
+  @objc public func setSpanKind(_ spanKind: OpenTelemetryApiObjc.SpanKindObjc) -> Self
+  @discardableResult
+  @objc public func setStartTime(_ time: Foundation.Date) -> Self
+  @discardableResult
+  @objc public func setActive(_ active: Swift.Bool) -> Self
+  @objc public func startSpan() -> OpenTelemetryApiObjc.SpanObjc
+  @objc deinit
+}
+@objc public class SpanContextObjc : ObjectiveC.NSObject {
+  public init(_ spanContext: OpenTelemetryApi.SpanContext)
+  @objc public var traceId: OpenTelemetryApiObjc.TraceIdObjc {
+    @objc get
+  }
+  @objc public var spanId: OpenTelemetryApiObjc.SpanIdObjc {
+    @objc get
+  }
+  @objc public var traceFlags: OpenTelemetryApiObjc.TraceFlagsObjc {
+    @objc get
+  }
+  @objc public var traceState: OpenTelemetryApiObjc.TraceStateObjc {
+    @objc get
+  }
+  @objc public var isRemote: Swift.Bool {
+    @objc get
+  }
+  @objc public static func create(_ traceId: OpenTelemetryApiObjc.TraceIdObjc, spanId: OpenTelemetryApiObjc.SpanIdObjc, traceFlags: OpenTelemetryApiObjc.TraceFlagsObjc, traceState: OpenTelemetryApiObjc.TraceStateObjc) -> OpenTelemetryApiObjc.SpanContextObjc
+  @objc public static func createFromRemoteParent(_ traceId: OpenTelemetryApiObjc.TraceIdObjc, spanId: OpenTelemetryApiObjc.SpanIdObjc, traceFlags: OpenTelemetryApiObjc.TraceFlagsObjc, traceState: OpenTelemetryApiObjc.TraceStateObjc) -> OpenTelemetryApiObjc.SpanContextObjc
+  @objc public var isValid: Swift.Bool {
+    @objc get
+  }
+  @objc public var isSampled: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public class SpanIdObjc : ObjectiveC.NSObject {
+  public var spanId: OpenTelemetryApi.SpanId {
+    get
+  }
+  public init(_ spanId: OpenTelemetryApi.SpanId)
+  @objc public static func random() -> OpenTelemetryApiObjc.SpanIdObjc
+  @objc public static func spanId(_ hexString: Swift.String, offset: Swift.Int = 0) -> OpenTelemetryApiObjc.SpanIdObjc
+  @objc public var hexString: Swift.String {
+    @objc get
+  }
+  @objc public var rawValue: Swift.UInt64 {
+    @objc get
+  }
+  @objc public var isValid: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public class SpanKindObjc : ObjectiveC.NSObject {
+  public var spanKind: OpenTelemetryApi.SpanKind {
+    get
+  }
+  @objc public static var INTERNAL: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  @objc public static var SERVER: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  @objc public static var CLIENT: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  @objc public static var PRODUCER: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  @objc public static var CONSUMER: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  public init(_ spanKind: OpenTelemetryApi.SpanKind)
+  @objc deinit
+}
+@objc public class SpanObjc : ObjectiveC.NSObject {
+  @objc public var kind: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  @objc public var context: OpenTelemetryApiObjc.SpanContextObjc {
+    @objc get
+  }
+  @objc public var isRecording: Swift.Bool {
+    @objc get
+  }
+  @objc public var status: OpenTelemetryApiObjc.StatusObjc {
+    @objc get
+    @objc set
+  }
+  @objc public var name: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc public func setAttribute(_ key: Swift.String, value: OpenTelemetryApiObjc.AttributeValueObjc?)
+  @objc public func addEvent(_ name: Swift.String)
+  @objc public func addEvent(_ name: Swift.String, timestamp: Foundation.Date)
+  @objc public func addEvent(_ name: Swift.String, attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc>)
+  @objc public func addEvent(_ name: Swift.String, attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc>, timestamp: Foundation.Date)
+  @objc public func end()
+  @objc public func end(time: Foundation.Date)
+  public init(_ span: OpenTelemetryApi.Span)
+  @objc deinit
+}
+@objc extension OpenTelemetryApiObjc.SpanObjc {
+  @objc dynamic public func setAttribute(_ key: Swift.String, stringValue: Swift.String)
+  @objc dynamic public func setAttribute(_ key: Swift.String, intValue: Swift.Int)
+  @objc dynamic public func setAttribute(_ key: Swift.String, doubleValue: Swift.Double)
+  @objc dynamic public func setAttribute(_ key: Swift.String, boolValue: Swift.Bool)
+}
+@objc extension OpenTelemetryApiObjc.SpanObjc {
+  @objc dynamic public func putHttpHostAttribute(_ hostName: Swift.String, port: Swift.Int)
+  @objc dynamic public func putHttpStatusCode(_ statusCode: Swift.Int, reasonPhrase: Swift.String)
+}
+@objc public class StatusObjc : ObjectiveC.NSObject {
+  public var status: OpenTelemetryApi.Status {
+    get
+  }
+  @objc public static var OK: OpenTelemetryApiObjc.StatusObjc {
+    @objc get
+  }
+  @objc public static var UNSET: OpenTelemetryApiObjc.StatusObjc {
+    @objc get
+  }
+  @objc public static var ERROR: OpenTelemetryApiObjc.StatusObjc {
+    @objc get
+  }
+  public var isOk: Swift.Bool {
+    get
+  }
+  public var isError: Swift.Bool {
+    get
+  }
+  public var name: Swift.String {
+    get
+  }
+  public var code: Swift.Int {
+    get
+  }
+  public init(_ status: OpenTelemetryApi.Status)
+  @objc public static func error(_ description: Swift.String) -> OpenTelemetryApiObjc.StatusObjc
+  @objc deinit
+}
+@objc public class TraceFlagsObjc : ObjectiveC.NSObject {
+  public var traceFlags: OpenTelemetryApi.TraceFlags {
+    get
+  }
+  public init(_ traceFlags: OpenTelemetryApi.TraceFlags)
+  @objc public var hexString: Swift.String {
+    @objc get
+  }
+  @objc public var sampled: Swift.Bool {
+    @objc get
+  }
+  @objc public func setIsSampled(_ isSampled: Swift.Bool)
+  @objc public func settingIsSampled(_ isSampled: Swift.Bool) -> OpenTelemetryApiObjc.TraceFlagsObjc
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public class TraceIdObjc : ObjectiveC.NSObject {
+  public var traceId: OpenTelemetryApi.TraceId
+  public init(_ traceId: OpenTelemetryApi.TraceId)
+  @objc public static func random() -> OpenTelemetryApiObjc.TraceIdObjc
+  @objc public static func traceId(_ hexString: Swift.String, offset: Swift.Int = 0) -> OpenTelemetryApiObjc.TraceIdObjc
+  @objc public var isValid: Swift.Bool {
+    @objc get
+  }
+  @objc public var hexString: Swift.String {
+    @objc get
+  }
+  @objc public var rawHigherLong: Swift.UInt64 {
+    @objc get
+  }
+  @objc public var rawLowerLong: Swift.UInt64 {
+    @objc get
+  }
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public class TraceStateObjc : ObjectiveC.NSObject {
+  public var traceState: OpenTelemetryApi.TraceState {
+    get
+  }
+  public init(_ traceState: OpenTelemetryApi.TraceState)
+  public var entries: [OpenTelemetryApiObjc.TraceStateObjc.EntryObjc] {
+    get
+  }
+  public func get(key: Swift.String) -> Swift.String?
+  public func setting(key: Swift.String, value: Swift.String) -> Self
+  public func removing(key: Swift.String) -> OpenTelemetryApiObjc.TraceStateObjc
+  @objc public class EntryObjc : ObjectiveC.NSObject {
+    @objc public var key: Swift.String {
+      @objc get
+    }
+    @objc public var value: Swift.String {
+      @objc get
+    }
+    public init(_ entry: OpenTelemetryApi.TraceState.Entry)
+    @objc deinit
+  }
+  @objc deinit
+}
+@objc public class TracerObjc : ObjectiveC.NSObject {
+  public init(_ tracer: OpenTelemetryApi.Tracer)
+  @objc public func spanBuilder(_ spanName: Swift.String) -> OpenTelemetryApiObjc.SpanBuilderObjc
+  @objc deinit
+}
+@objc public class TracerProviderObjc : ObjectiveC.NSObject {
+  public init(_ tracerProvider: OpenTelemetryApi.TracerProvider)
+  @objc public func get(_ instrumentationName: Swift.String, instrumentationVersion: Swift.String? = nil) -> OpenTelemetryApiObjc.TracerObjc
+  @objc deinit
+}
+extension OpenTelemetryApiObjc.OpenTelemetryContextKeysObjc : Swift.Equatable {}
+extension OpenTelemetryApiObjc.OpenTelemetryContextKeysObjc : Swift.Hashable {}
+extension OpenTelemetryApiObjc.OpenTelemetryContextKeysObjc : Swift.RawRepresentable {}

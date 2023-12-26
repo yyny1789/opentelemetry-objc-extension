@@ -1,0 +1,437 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-tvos11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OpenTelemetrySdkObjc
+import Foundation
+import OpenTelemetryApi
+import OpenTelemetryApiObjc
+import OpenTelemetrySdk
+import Swift
+import _Concurrency
+@objc public protocol ClockImpl {
+  @objc var now: Foundation.Date { get }
+  @objc var nanoTime: Swift.UInt64 { get }
+}
+@objc @_hasMissingDesignatedInitializers public class ClockObjc : ObjectiveC.NSObject {
+  @objc public static func clock(_ clock: OpenTelemetrySdkObjc.ClockImpl) -> OpenTelemetrySdkObjc.ClockObjc
+  @objc deinit
+}
+@objc public class InstrumentationScopeInfoObjc : ObjectiveC.NSObject {
+  public var instrumentationScope: OpenTelemetrySdk.InstrumentationScopeInfo {
+    get
+  }
+  public var name: Swift.String {
+    get
+  }
+  public var version: Swift.String? {
+    get
+  }
+  public var schemaUrl: Swift.String? {
+    get
+  }
+  public static func instrumentationScope(name: Swift.String, version: Swift.String? = nil, schemaUrl: Swift.String? = nil) -> OpenTelemetrySdkObjc.InstrumentationScopeInfoObjc
+  public init(_ instrumentationScope: OpenTelemetrySdk.InstrumentationScopeInfo)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class EnvVarResourceObjc : ObjectiveC.NSObject {
+  @objc public static let resource: OpenTelemetrySdkObjc.ResourceObjc
+  @objc public static func get(environment: Swift.Dictionary<Swift.String, Swift.String> = ProcessInfo.processInfo.environment) -> OpenTelemetrySdkObjc.ResourceObjc
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class ResourceAttributesObjc : ObjectiveC.NSObject {
+  @objc public static var cloudProvider: Swift.String
+  @objc public static var cloudAccountId: Swift.String
+  @objc public static var cloudRegion: Swift.String
+  @objc public static var cloudAvailabilityZone: Swift.String
+  @objc public static var cloudPlatform: Swift.String
+  @objc public static var awsEcsContainerArn: Swift.String
+  @objc public static var awsEcsClusterArn: Swift.String
+  @objc public static var awsEcsLaunchtype: Swift.String
+  @objc public static var awsEcsTaskArn: Swift.String
+  @objc public static var awsEcsTaskFamily: Swift.String
+  @objc public static var awsEcsTaskRevision: Swift.String
+  @objc public static var awsEksClusterArn: Swift.String
+  @objc public static var awsLogGroupNames: Swift.String
+  @objc public static var awsLogGroupArns: Swift.String
+  @objc public static var awsLogStreamNames: Swift.String
+  @objc public static var awsLogStreamArns: Swift.String
+  @objc public static var containerName: Swift.String
+  @objc public static var containerId: Swift.String
+  @objc public static var containerRuntime: Swift.String
+  @objc public static var containerImageName: Swift.String
+  @objc public static var containerImageTag: Swift.String
+  @objc public static var deploymentEnvironment: Swift.String
+  @objc public static var deviceId: Swift.String
+  @objc public static var deviceModelIdentifier: Swift.String
+  @objc public static var deviceModelName: Swift.String
+  @objc public static var faasName: Swift.String
+  @objc public static var faasId: Swift.String
+  @objc public static var faasVersion: Swift.String
+  @objc public static var faasInstance: Swift.String
+  @objc public static var faasMaxMemory: Swift.String
+  @objc public static var hostId: Swift.String
+  @objc public static var hostName: Swift.String
+  @objc public static var hostType: Swift.String
+  @objc public static var hostArch: Swift.String
+  @objc public static var hostImageName: Swift.String
+  @objc public static var hostImageId: Swift.String
+  @objc public static var hostImageVersion: Swift.String
+  @objc public static var k8sClusterName: Swift.String
+  @objc public static var k8sNodeName: Swift.String
+  @objc public static var k8sNodeUid: Swift.String
+  @objc public static var k8sNamespaceName: Swift.String
+  @objc public static var k8sPodUid: Swift.String
+  @objc public static var k8sPodName: Swift.String
+  @objc public static var k8sContainerName: Swift.String
+  @objc public static var k8sReplicasetUid: Swift.String
+  @objc public static var k8sReplicasetName: Swift.String
+  @objc public static var k8sDeploymentUid: Swift.String
+  @objc public static var k8sDeploymentName: Swift.String
+  @objc public static var k8sStatefulsetUid: Swift.String
+  @objc public static var k8sStatefulsetName: Swift.String
+  @objc public static var k8sDaemonsetUid: Swift.String
+  @objc public static var k8sDaemonsetName: Swift.String
+  @objc public static var k8sJobUid: Swift.String
+  @objc public static var k8sJobName: Swift.String
+  @objc public static var k8sCronjobUid: Swift.String
+  @objc public static var k8sCronjobName: Swift.String
+  @objc public static var osType: Swift.String
+  @objc public static var osDescription: Swift.String
+  @objc public static var osName: Swift.String
+  @objc public static var osVersion: Swift.String
+  @objc public static var processPid: Swift.String
+  @objc public static var processExecutableName: Swift.String
+  @objc public static var processExecutablePath: Swift.String
+  @objc public static var processCommand: Swift.String
+  @objc public static var processCommandLine: Swift.String
+  @objc public static var processCommandArgs: Swift.String
+  @objc public static var processOwner: Swift.String
+  @objc public static var processRuntimeName: Swift.String
+  @objc public static var processRuntimeVersion: Swift.String
+  @objc public static var processRuntimeDescription: Swift.String
+  @objc public static var serviceName: Swift.String
+  @objc public static var serviceNamespace: Swift.String
+  @objc public static var serviceInstanceId: Swift.String
+  @objc public static var serviceVersion: Swift.String
+  @objc public static var telemetrySdkName: Swift.String
+  @objc public static var telemetrySdkLanguage: Swift.String
+  @objc public static var telemetrySdkVersion: Swift.String
+  @objc public static var telemetryAutoVersion: Swift.String
+  @objc public static var webengineName: Swift.String
+  @objc public static var webengineVersion: Swift.String
+  @objc public static var webengineDescription: Swift.String
+  @objc public class CloudProviderValuesObjc : ObjectiveC.NSObject {
+    public static let alibabaCloud: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudProviderValuesObjc
+    public static let aws: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudProviderValuesObjc
+    public static let azure: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudProviderValuesObjc
+    public static let gcp: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudProviderValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc public class CloudPlatformValuesObjc : ObjectiveC.NSObject {
+    public static let alibabaCloudEcs: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let alibabaCloudFc: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let awsEc2: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let awsEcs: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let awsEks: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let awsLambda: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let awsElasticBeanstalk: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let azureVm: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let azureContainerInstances: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let azureAks: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let azureFunctions: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let azureAppService: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let gcpComputeEngine: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let gcpCloudRun: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let gcpKubernetesEngine: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let gcpCloudFunctions: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public static let gcpAppEngine: OpenTelemetrySdkObjc.ResourceAttributesObjc.CloudPlatformValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc @_inheritsConvenienceInitializers public class AwsEcsLaunchtypeValuesObjc : ObjectiveC.NSObject {
+    @objc public static var ec2: Swift.String
+    @objc public static var fargate: Swift.String
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class HostArchValuesObjc : ObjectiveC.NSObject {
+    public static let amd64: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public static let arm32: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public static let arm64: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public static let ia64: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public static let ppc32: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public static let ppc64: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public static let x86: OpenTelemetrySdkObjc.ResourceAttributesObjc.HostArchValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc public class OsTypeValuesObjc : ObjectiveC.NSObject {
+    public static let windows: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let linux: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let darwin: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let freebsd: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let netbsd: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let openbsd: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let dragonflybsd: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let hpux: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let aix: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let solaris: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public static let zOs: OpenTelemetrySdkObjc.ResourceAttributesObjc.OsTypeValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc public class TelemetrySdkLanguageValuesObjc : ObjectiveC.NSObject {
+    public static let cpp: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let dotnet: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let erlang: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let go: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let java: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let nodejs: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let php: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let python: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let ruby: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let webjs: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public static let swift: OpenTelemetrySdkObjc.ResourceAttributesObjc.TelemetrySdkLanguageValuesObjc
+    public init(_ customValue: Swift.String)
+    @objc override dynamic public var description: Swift.String {
+      @objc get
+    }
+    @objc deinit
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class ResourceObjc : ObjectiveC.NSObject {
+  @objc public static var empty: OpenTelemetrySdkObjc.ResourceObjc {
+    @objc get
+  }
+  @objc public var attributes: [Swift.String : OpenTelemetryApiObjc.AttributeValueObjc] {
+    @objc get
+  }
+  public init(_ resource: OpenTelemetrySdk.Resource)
+  convenience public init(attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc>)
+  @objc public static func resource(_ attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc>) -> OpenTelemetrySdkObjc.ResourceObjc
+  @objc public func merge(_ other: OpenTelemetrySdkObjc.ResourceObjc)
+  public func merging(_ other: OpenTelemetrySdkObjc.ResourceObjc) -> OpenTelemetrySdkObjc.ResourceObjc
+  @objc deinit
+}
+@objc public class SpanDataObjc : ObjectiveC.NSObject {
+  public init(_ spanData: OpenTelemetrySdk.SpanData)
+  @objc public var traceId: OpenTelemetryApiObjc.TraceIdObjc {
+    @objc get
+  }
+  @objc public var spanId: OpenTelemetryApiObjc.SpanIdObjc {
+    @objc get
+  }
+  @objc public var traceFlags: OpenTelemetryApiObjc.TraceFlagsObjc {
+    @objc get
+  }
+  @objc public var traceState: OpenTelemetryApiObjc.TraceStateObjc {
+    @objc get
+  }
+  @objc public var parentSpanId: OpenTelemetryApiObjc.SpanIdObjc? {
+    @objc get
+  }
+  @objc public var resource: OpenTelemetrySdkObjc.ResourceObjc {
+    @objc get
+  }
+  @objc public var instrumentationScope: OpenTelemetrySdkObjc.InstrumentationScopeInfoObjc {
+    @objc get
+  }
+  @objc public var name: Swift.String {
+    @objc get
+  }
+  @objc public var kind: OpenTelemetryApiObjc.SpanKindObjc {
+    @objc get
+  }
+  @objc public var startTime: Foundation.Date {
+    @objc get
+  }
+  @objc public var attributes: [Swift.String : OpenTelemetryApiObjc.AttributeValueObjc] {
+    @objc get
+  }
+  @objc public var events: [OpenTelemetrySdkObjc.SpanDataObjc.EventObjc] {
+    @objc get
+  }
+  @objc public var links: [OpenTelemetrySdkObjc.SpanDataObjc.LinkObjc] {
+    @objc get
+  }
+  @objc public var status: OpenTelemetryApiObjc.StatusObjc {
+    @objc get
+  }
+  @objc public var endTime: Foundation.Date {
+    @objc get
+  }
+  @objc public var hasRemoteParent: Swift.Bool {
+    @objc get
+  }
+  @objc public var hasEnded: Swift.Bool {
+    @objc get
+  }
+  @objc public var totalRecordedEvents: Swift.Int {
+    @objc get
+  }
+  @objc public var totalRecordedLinks: Swift.Int {
+    @objc get
+  }
+  @objc public var totalAttributeCount: Swift.Int {
+    @objc get
+  }
+  @discardableResult
+  public func settingName(_ name: Swift.String) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingTraceId(_ traceId: OpenTelemetryApiObjc.TraceIdObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingSpanId(_ spanId: OpenTelemetryApiObjc.SpanIdObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingTraceFlags(_ traceFlags: OpenTelemetryApiObjc.TraceFlagsObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingTraceState(_ traceState: OpenTelemetryApiObjc.TraceStateObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingAttributes(_ attributes: [Swift.String : OpenTelemetryApiObjc.AttributeValueObjc]) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingStartTime(_ time: Foundation.Date) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingEndTime(_ time: Foundation.Date) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingKind(_ kind: OpenTelemetryApiObjc.SpanKindObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingLinks(_ links: [OpenTelemetrySdkObjc.SpanDataObjc.LinkObjc]) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingParentSpanId(_ parentSpanId: OpenTelemetryApiObjc.SpanIdObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingResource(_ resource: OpenTelemetrySdkObjc.ResourceObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingStatus(_ status: OpenTelemetryApiObjc.StatusObjc) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingEvents(_ events: [OpenTelemetrySdkObjc.SpanDataObjc.EventObjc]) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingHasRemoteParent(_ hasRemoteParent: Swift.Bool) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingHasEnded(_ hasEnded: Swift.Bool) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingTotalRecordedEvents(_ totalRecordedEvents: Swift.Int) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingTotalRecordedLinks(_ totalRecordedLinks: Swift.Int) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @discardableResult
+  public func settingTotalAttributeCount(_ totalAttributeCount: Swift.Int) -> OpenTelemetrySdkObjc.SpanDataObjc
+  @objc public class LinkObjc : ObjectiveC.NSObject {
+    public init(_ link: OpenTelemetrySdk.SpanData.Link)
+    @objc deinit
+  }
+  @objc public class EventObjc : ObjectiveC.NSObject {
+    public var event: OpenTelemetrySdk.SpanData.Event {
+      get
+    }
+    public var timestamp: Foundation.Date {
+      get
+    }
+    public var name: Swift.String {
+      get
+    }
+    public var attributes: [Swift.String : OpenTelemetryApiObjc.AttributeValueObjc] {
+      get
+    }
+    public init(_ event: OpenTelemetrySdk.SpanData.Event)
+    @objc public static func event(_ name: Swift.String, timestamp: Foundation.Date, attributes: [Swift.String : OpenTelemetryApiObjc.AttributeValueObjc]? = nil) -> OpenTelemetrySdkObjc.SpanDataObjc.EventObjc
+    public static func event(_ timestamp: Foundation.Date, event: OpenTelemetrySdkObjc.SpanDataObjc.EventObjc) -> OpenTelemetrySdkObjc.SpanDataObjc.EventObjc
+    @objc deinit
+  }
+  @objc deinit
+}
+@objc public protocol BatchSpanWillExportCallback {
+  @objc func willExportCallback(_ spanData: [OpenTelemetrySdkObjc.SpanDataObjc])
+}
+@objc public class BatchSpanProcessorObjc : OpenTelemetrySdkObjc.SpanProcessorObjc {
+  public init(spanExporter: OpenTelemetrySdkObjc.SpanExporterObjc, scheduleDelay: Foundation.TimeInterval = 5, exportTimeout: Foundation.TimeInterval = 30, maxQueueSize: Swift.Int = 2048, maxExportBatchSize: Swift.Int = 512, willExportCallback: OpenTelemetrySdkObjc.BatchSpanWillExportCallback? = nil)
+  @objc public static func processor(_ spanExporter: OpenTelemetrySdkObjc.SpanExporterObjc, scheduleDelay: Foundation.TimeInterval = 5, exportTimeout: Foundation.TimeInterval = 30, maxQueueSize: Swift.Int = 2048, maxExportBatchSize: Swift.Int = 512, willExportCallback: OpenTelemetrySdkObjc.BatchSpanWillExportCallback? = nil) -> OpenTelemetrySdkObjc.BatchSpanProcessorObjc
+  @objc public static func processor(_ spanExporter: OpenTelemetrySdkObjc.SpanExporterObjc) -> OpenTelemetrySdkObjc.BatchSpanProcessorObjc
+  @objc deinit
+}
+@objc public class MultiSpanExporterObjc : OpenTelemetrySdkObjc.SpanExporterObjc {
+  @objc public init(spanExporters: Swift.Array<OpenTelemetrySdkObjc.SpanExporterObjc>)
+  @objc public static func multiSpanExporter(_ spanExporters: Swift.Array<OpenTelemetrySdkObjc.SpanExporterObjc>) -> OpenTelemetrySdkObjc.MultiSpanExporterObjc
+  @objc deinit
+}
+@objc open class SpanExporterObjc : ObjectiveC.NSObject {
+  public var spanExporter: OpenTelemetrySdk.SpanExporter {
+    get
+  }
+  public init(_ spanExporter: OpenTelemetrySdk.SpanExporter)
+  @discardableResult
+  @objc public func export(spans: [OpenTelemetrySdkObjc.SpanDataObjc]) -> OpenTelemetrySdkObjc.SpanExporterResultCodeObjc
+  @objc public func flush() -> OpenTelemetrySdkObjc.SpanExporterResultCodeObjc
+  @objc public func shutdown()
+  @objc public static func exporter(impl: OpenTelemetrySdkObjc.SpanExporterImpl) -> OpenTelemetrySdkObjc.SpanExporterObjc
+  @objc public static func exporter(_ exporter: ObjectiveC.NSObject) -> OpenTelemetrySdkObjc.SpanExporterObjc?
+  @objc deinit
+}
+@objc public class SpanExporterResultCodeObjc : ObjectiveC.NSObject {
+  public var spanExporterResultCode: OpenTelemetrySdk.SpanExporterResultCode {
+    get
+  }
+  @objc public static var success: OpenTelemetrySdkObjc.SpanExporterResultCodeObjc {
+    @objc get
+  }
+  @objc public static var failure: OpenTelemetrySdkObjc.SpanExporterResultCodeObjc {
+    @objc get
+  }
+  public init(_ spanexporterResultCode: OpenTelemetrySdk.SpanExporterResultCode)
+  @objc deinit
+}
+@objc public protocol SpanExporterImpl {
+  @objc @discardableResult
+  func export(_ spans: [OpenTelemetrySdkObjc.SpanDataObjc]) -> OpenTelemetrySdkObjc.SpanExporterResultCodeObjc
+  @objc func flush() -> OpenTelemetrySdkObjc.SpanExporterResultCodeObjc
+  @objc func shutdown()
+}
+@objc public protocol DecisionImpl {
+  @objc var isSampled: Swift.Bool { get }
+  @objc var attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc> { get }
+}
+@objc public protocol SamplerImpl {
+  @objc func shouldSample(parentContext: OpenTelemetryApiObjc.SpanContextObjc?, traceId: OpenTelemetryApiObjc.TraceIdObjc, name: Swift.String, kind: OpenTelemetryApiObjc.SpanKindObjc, attributes: Swift.Dictionary<Swift.String, OpenTelemetryApiObjc.AttributeValueObjc>, parentLinks: [OpenTelemetrySdkObjc.SpanDataObjc.LinkObjc]) -> OpenTelemetrySdkObjc.DecisionImpl
+  @objc var description: Swift.String { get }
+}
+@objc public class SamplerObjc : ObjectiveC.NSObject {
+  public init(_ sampler: OpenTelemetrySdk.Sampler)
+  @objc public static func sampler(_ sampler: OpenTelemetrySdkObjc.SamplerImpl) -> OpenTelemetrySdkObjc.SamplerObjc
+  @objc deinit
+}
+@objc public class SpanProcessorObjc : ObjectiveC.NSObject {
+  public init(_ spanProcessor: OpenTelemetrySdk.SpanProcessor)
+  @objc deinit
+}
+@objc public class MultiSpanProcessorObjc : OpenTelemetrySdkObjc.SpanProcessorObjc {
+  public init(_ spanProcessors: Swift.Array<OpenTelemetrySdkObjc.SpanProcessorObjc>)
+  @objc public static func processor(_ spanProcessors: Swift.Array<OpenTelemetrySdkObjc.SpanProcessorObjc>) -> OpenTelemetrySdkObjc.MultiSpanProcessorObjc
+  @objc deinit
+}
+@objc public class SimpleSpanProcessorObjc : OpenTelemetrySdkObjc.SpanProcessorObjc {
+  @objc public init(spanExporter: OpenTelemetrySdkObjc.SpanExporterObjc)
+  @objc public static func processor(_ spanExporter: OpenTelemetrySdkObjc.SpanExporterObjc) -> OpenTelemetrySdkObjc.SimpleSpanProcessorObjc
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class TracerProviderBuilderObjc : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc public static func builder() -> OpenTelemetrySdkObjc.TracerProviderBuilderObjc
+  public func with(_ clock: OpenTelemetrySdkObjc.ClockObjc) -> Self
+  @objc public func with(sampler: OpenTelemetrySdkObjc.SamplerObjc) -> Self
+  @objc public func with(resource: OpenTelemetrySdkObjc.ResourceObjc) -> Self
+  @objc public func addSpanProcessor(_ spanProcessor: OpenTelemetrySdkObjc.SpanProcessorObjc) -> Self
+  @objc public func addSpanProcessors(_ spanProcessors: Swift.Array<OpenTelemetrySdkObjc.SpanProcessorObjc>) -> Self
+  @objc public func build() -> OpenTelemetryApiObjc.TracerProviderObjc
+  @objc deinit
+}
