@@ -22,7 +22,7 @@ import OpenTelemetrySdk
 //}
 
 @objc
-public class BatchSpanProcessorObjc: NSObject, SpanProcessorObjc {
+public class BatchSpanProcessorObjc: NSObject {
     var batchSpanProcessor: BatchSpanProcessor
     
     public init(spanExporter: SpanExporterObjc, scheduleDelay: TimeInterval = 5, exportTimeout: TimeInterval = 30,

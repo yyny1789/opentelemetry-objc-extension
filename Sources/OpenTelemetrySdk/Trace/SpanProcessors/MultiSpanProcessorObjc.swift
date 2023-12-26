@@ -15,7 +15,7 @@
 import Foundation
 import OpenTelemetrySdk
 
-public class MultiSpanProcessorObjc: NSObject, SpanProcessorObjc {
+public class MultiSpanProcessorObjc: NSObject {
 
     
     var multiSpanProcessor: MultiSpanProcessor

@@ -50,8 +50,19 @@ public class TracerProviderBuilderObjc : NSObject {
     }
     
     @objc
-    public func addSpanProcessor(_ spanProcessor: SpanProcessorObjc) -> Self {
-        _ = tracerProviderBuilder.add(spanProcessor: spanProcessor.spanProcessor().processor)
+    public func addSpanProcessor(_ spanProcessor: NSObject) -> Self {
+        if let processor = spanProcessor as? BatchSpanProcessorObjc {
+            _ = tracerProviderBuilder.add(spanProcessor: processor.spanProcessor().processor)
+        }
+        
+        if let processor = spanProcessor as? MultiSpanProcessorObjc {
+            _ = tracerProviderBuilder.add(spanProcessor: processor.spanProcessor().processor)
+        }
+        
+        if let processor = spanProcessor as? SimpleSpanProcessorObjc {
+            _ = tracerProviderBuilder.add(spanProcessor: processor.spanProcessor().processor)
+        }
+        
         return self
     }
     

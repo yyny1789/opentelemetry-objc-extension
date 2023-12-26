@@ -17,7 +17,7 @@ import Foundation
 import OpenTelemetryApi
 import OpenTelemetrySdk
 
-public class SimpleSpanProcessorObjc: NSObject, SpanProcessorObjc {
+public class SimpleSpanProcessorObjc: NSObject {
     var simpleSpanProcessor: SimpleSpanProcessor
     
     @objc
