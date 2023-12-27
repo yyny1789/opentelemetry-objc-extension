@@ -3,7 +3,7 @@
 ################################################################################################################################
 
 Pod::Spec.new do |s|
-  s.name             = 'OpenTelemetryApiObjc'
+  s.name             = 'URLSessionInstrumentationObjc'
   s.version          = '1.1.0-dev.11'
   s.summary          = 'aliyun log service ios otel common library.'
 
@@ -35,14 +35,16 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
 #  s.xcconfig = { 'GCC_ENABLE_CPP_EXCEPTIONS' => 'YES' }
 
-#  s.default_subspec = 'AliyunLogOTelCommon'
 #  s.ios.deployment_target = '11.0'
 #  s.osx.deployment_target =  '10.13'
 #  s.tvos.deployment_target =  '11.0'
-  
-  s.dependency 'AliyunLogOTelCommon/OpenTelemetryApi', "4.2.1-dev.3"
-#  s.vendored_frameworks = 'XCFramework/OpenTelemetryApiObjc.xcframework'
-  s.source_files = 'Sources/OpenTelemetryApi/**/*.{m,h,swift}'
+
+  s.dependency 'OpenTelemetryApiObjc', '1.1.0-dev.10'
+  s.dependency 'AliyunLogOTelCommon/OpenTelemetryApi', '4.2.1-dev.3'
+  s.dependency 'AliyunLogOTelCommon/OpenTelemetrySdk', '4.2.1-dev.3'
+  s.dependency 'AliyunLogOTelCommon/URLSessionInstrumentation', '4.2.1-dev.3'
+#  s.vendored_frameworks = 'XCFramework/OpenTelemetrySdkObjc.xcframework'
+  s.source_files = 'Sources/Instrumentation/URLSession/**/*.{m,h,swift}'
   s.pod_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 i386',
     'OTHER_LDFLAGS' => '-ObjC',
