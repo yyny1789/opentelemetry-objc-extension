@@ -40,8 +40,8 @@ Pod::Spec.new do |s|
 #  s.tvos.deployment_target =  '11.0'
 
   s.dependency 'OpenTelemetryApiObjc', "#{s.version}"
-  s.dependency 'AliyunLogOTelCommon/OpenTelemetryApi', '4.2.1'
-  s.dependency 'AliyunLogOTelCommon/OpenTelemetrySdk', '4.2.1'
+  s.dependency 'AliyunLogOTelCommon/OpenTelemetryApi', '>= 4.2.1'
+  s.dependency 'AliyunLogOTelCommon/OpenTelemetrySdk', '>= 4.2.1'
 #  s.vendored_frameworks = 'XCFramework/OpenTelemetrySdkObjc.xcframework'
   s.source_files = 'Sources/OpenTelemetrySdk/**/*.{m,h,swift}'
   s.pod_target_xcconfig = {
