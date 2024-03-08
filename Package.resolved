@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/open-telemetry/opentelemetry-swift",
         "state": {
           "branch": null,
-          "revision": "869dc5acd61860a0ee150fa37e34e3a452ccf4b8",
-          "version": "1.6.0"
+          "revision": "8b1b833bb471fdb9f5ddec0fa56c6a73cf4f46cf",
+          "version": "1.9.1"
         }
       },
       {
@@ -26,15 +26,6 @@
           "branch": null,
           "revision": "18c1a35ca966236cee0c5a714a51a73ff33384c1",
           "version": "0.5.2"
-        }
-      },
-      {
-        "package": "Reachability",
-        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
-        "state": {
-          "branch": null,
-          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-          "version": "5.1.0"
         }
       },
       {

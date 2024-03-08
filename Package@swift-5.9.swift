@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,9 +6,11 @@ import PackageDescription
 let package = Package(
     name: "opentelemetry-objc-extension",
 //    defaultLocalization: "en",
-    platforms: [.macOS(.v10_13),
-                .iOS(.v11),
-                .tvOS(.v11)],
+    platforms: [
+        .macOS(.v10_15),
+        .iOS(.v13),
+        .tvOS(.v13)
+    ],
     products: [
         .library(
             name: "OpenTelemetrySdkObjc",
@@ -31,7 +33,7 @@ let package = Package(
             targets: ["OpenTelemetryProtocolExporterCommonObjc"]
         ),
         .library(
-            name: "OpenTelemetryProtocolExporterObjc", 
+            name: "OpenTelemetryProtocolExporterObjc",
             type: .static,
             targets: [
                 "OpenTelemetryProtocolExporterObjc"
@@ -58,8 +60,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "opentelemetry-swift", url:"https://github.com/open-telemetry/opentelemetry-swift", .exact("1.9.1")),
-        .package(name: "grpc-swift", url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0"),
+        .package(url:"https://github.com/open-telemetry/opentelemetry-swift", from: "1.9.1"),
+        .package(url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0"),
     ],
     targets: [
         .target(

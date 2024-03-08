@@ -68,7 +68,7 @@ fileprivate class SpanExporterWrapper: SpanExporter {
         self.impl = impl
     }
     
-    func export(spans: [SpanData]) -> SpanExporterResultCode {
+    func export(spans: [OpenTelemetrySdk.SpanData], explicitTimeout: TimeInterval?) -> OpenTelemetrySdk.SpanExporterResultCode {
         var spns = [SpanDataObjc]()
         for spn in spans {
             spns.append(SpanDataObjc(spn))
@@ -77,11 +77,11 @@ fileprivate class SpanExporterWrapper: SpanExporter {
         return impl.export(spns).spanExporterResultCode
     }
     
-    func flush() -> SpanExporterResultCode {
+    func flush(explicitTimeout: TimeInterval?) -> OpenTelemetrySdk.SpanExporterResultCode {
         return impl.flush().spanExporterResultCode
     }
     
-    func shutdown() {
+    func shutdown(explicitTimeout: TimeInterval?) {
         impl.shutdown()
     }
 }
