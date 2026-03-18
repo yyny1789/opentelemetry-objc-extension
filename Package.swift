@@ -7,7 +7,7 @@ let package = Package(
     name: "opentelemetry-objc-extension",
 //    defaultLocalization: "en",
     platforms: [.macOS(.v10_13),
-                .iOS(.v11),
+                .iOS(.v13),
                 .tvOS(.v11)],
     products: [
         .library(
@@ -58,7 +58,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "opentelemetry-swift", url:"https://github.com/open-telemetry/opentelemetry-swift", .exact("1.9.1")),
+        .package(name: "opentelemetry-swift", url:"https://github.com/yyny1789/opentelemetry-swift", .exact("1.9.1-xcode-fix")),
         .package(name: "grpc-swift", url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0"),
     ],
     targets: [
